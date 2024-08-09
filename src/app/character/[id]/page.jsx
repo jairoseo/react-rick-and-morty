@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 
 export async function generateStaticParams(){
@@ -14,12 +15,29 @@ export default async function Page({params}){
     if(!character) notFound();
 
     return (
-        <div>
-            <h1>{character.name}</h1>
-            <p><Image src={character.image} width={150} height={150} alt={character.name} title={character.name} /></p>
-            <p>{character.status}</p>
-            <p>{character.species}</p>
-        </div>
+        <main className="flex flex-col items-center justify-between p-24">
+            <section>
+                <div className="flex justify-center">
+                    <div className="max-w-3xl">
+                        <div className="m-4 block rounded-lg bg-white p-6 shadow-lg dark:bg-neutral-800 dark:shadow-black/20">        
+                            <div className="md:flex md:flex-row">
+                                <div className="mx-auto mb-6 flex w-36 items-center justify-center md:mx-0 md:w-96 lg:mb-0">                                
+                                    <Image src={character.image} width={250} height={250} alt={character.name} title={character.name} className="rounded-full shadow-md dark:shadow-black/30" />
+                                </div>
+                                <div className="md:ms-6">
+                                    <p className="mb-6 text-xl font-semibold text-neutral-800 dark:text-neutral-200">Name: {character.name}</p>
+                                    <p className="mb-6 font-semibold text-neutral-500 dark:text-neutral-300">Species: {character.species}</p>                                
+                                    <p className="mb-6 font-semibold text-neutral-500 dark:text-neutral-300">Gender: {character.gender}</p>  
+                                    <p className="mb-6 font-semibold text-neutral-500 dark:text-neutral-400">Current state: {character.status}</p>
+                                    <p className="mb-6 font-semibold text-neutral-500 dark:text-neutral-400">Origin: {character.origin.name}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div><Link href={'/'}>&laquo; Back</Link></div>
+                    </div>
+                </div>
+            </section>
+        </main>
     )
 }
 
