@@ -4,10 +4,8 @@ import Link from "next/link";
 export default async function Home() {
   const data = await getData();
   return (
-    <main className="flex flex-col items-center justify-between p-24">
-      
-      <h1 style={{marginBottom: '20pt', fontSize: '20pt'}}>Rick and Morty List Character</h1>
-      
+    <main className="flex flex-col items-center justify-between p-24">      
+      <h1 style={{marginBottom: '20pt', fontSize: '20pt'}}>Rick and Morty List Characters</h1>      
       <ul className="grid grid-cols-12 gap-4">
         {
           data.results.map((character) => (
