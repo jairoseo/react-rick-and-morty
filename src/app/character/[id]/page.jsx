@@ -2,6 +2,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+
+export async function generateMetadata({params}) {
+    const character = await getData(params.id);
+    return {
+        title: character.name + ' - character'
+    };
+}
+
 export async function generateStaticParams(){
     const characters = await fetch("https://rickandmortyapi.com/api/character").then((res) => res.json());
     return characters.results.map((character) => (
@@ -12,6 +20,7 @@ export async function generateStaticParams(){
 export default async function Page({params}){
 
     const character = await getData(params.id);
+    
     if(!character) notFound();
 
     return (
